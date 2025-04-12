@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Form Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-builder {
+            margin-bottom: 20px;
+        }
+        .form-field {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dynamic Form Builder</h1>
+    <div class="form-builder">
+        <label for="field-type">Choose Field Type:</label>
+        <select id="field-type">
+            <option value="text">Text Box</option>
+            <option value="checkbox">Checkbox</option>
+            <option value="datetime">Datetime</option>
+            <option value="select">Dropdown</option>
+        </select>
+        <input type="text" id="field-label" placeholder="Field Label">
+        <button onclick="addField()">Add Field</button>
+    </div>
+    <form id="custom-form">
+        <h3>Your Form</h3>
+    </form>
+    <button onclick="saveForm()">Save Form</button>
+
+    <script>
+        function addField() {
+            const form = document.getElementById('custom-form');
+            const fieldType = document.getElementById('field-type').value;
+            const fieldLabel = document.getElementById('field-label').value;
+
+            const fieldDiv = document.createElement('div');
+            fieldDiv.className = 'form-field';
+
+            const label = document.createElement('label');
+            label.innerText = fieldLabel;
+            fieldDiv.appendChild(label);
+
+            let input;
+            if (fieldType === 'text') {
+                input = document.createElement('input');
+                input.type = 'text';
+            } else if (fieldType === 'checkbox') {
+                input = document.createElement('input');
+                input.type = 'checkbox';
+            } else if (fieldType === 'datetime') {
+                input = document.createElement('input');
+                input.type = 'datetime-local';
+            } else if (fieldType === 'select') {
+                input = document.createElement('select');
+                const option1 = document.createElement('option');
+                option1.value = 'Option 1';
+                option1.textContent = 'Option 1';
+                const option2 = document.createElement('option');
+                option2.value = 'Option 2';
+                option2.textContent = 'Option 2';
+                input.appendChild(option1);
+                input.appendChild(option2);
+            }
+
+            fieldDiv.appendChild(input);
+            form.appendChild(fieldDiv);
+        }
+
+        function saveForm() {
+            alert("Form Saved! Backend Integration Required.");
+        }
+    </script>
+</body>
+</html>
